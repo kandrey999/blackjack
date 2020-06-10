@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Результаты</title>
+</head>
+<body>
+<ul>
+    {% for user, value in users.items()%}
+    <li>{{user}}:{{value}}</li>
+    {% endfor %}
+</ul>
+<form action="/game/">
+    <button type="submit">Рестарт</button>
+</form>
+
+</body>
+</html>

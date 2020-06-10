@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Игра</title>
+</head>
+<body>
+
+<form method="post">
+
+    <button type="submit">Взять карту</button>
+    <p>Ваш счет: {{count}} </p>
+
+
+</form>
+
+
+<form action="/changepassword/">
+    <button type="submit">Сменить пароль</button>
+
+</form>
+
+<form action="/changelogin/">
+
+    <button type="submit">Сменить логин</button>
+
+</form>
+
+<p></p>
+<form action={{url_for('result')}}>
+    <button type="submit">Результаты</button>
+
+</form>
+
+
+</body>
+</html>
+
+
+<!--<form>-->
+
+<!--    <button type="submit">Начать новую игру</button>-->
+
+<!--</form>-->

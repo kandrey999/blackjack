@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Логин</title>
+</head>
+<body>
+
+<form method="post">
+    <label for="login">Введите логин</label>
+    <label for="pas">Введите пароль</label>
+    <input required type="text" id="login" name="login" minlength="1" maxlength="10" pattern="^[a-zA-Zа-яА-Я]+$">
+    <input required type="text" id="pas" name="pas">
+    <button type="submit">Войти</button>
+    <p>Минимум - 1 символ, максимум - 10 символов.</p>
+<!--    <p>Вводить только английские буквы.</p>-->
+    <p>{{fail}}</p>
+</form>
+
+<form action="/register/">
+    <button type="submit">Регистрация</button>
+
+</form>
+
+</body>
+</html>
