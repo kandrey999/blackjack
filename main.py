@@ -40,7 +40,6 @@ class DbUsers:
             cursor = conn.cursor()
             cursor.execute(f'update blackjack set password = "{new_password}" where login = "{login}"')
 
-
     @staticmethod
     def change_login(new_login):
         old_login = session['login']
@@ -54,21 +53,25 @@ class CsvUsers:
     @staticmethod
     def create_user(login, password):
         user = [login, password]
-        with open(r'E:\Tutorial\users.csv', 'a', newline='') as file:
+        with open(r'users.csv', 'a', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(user)
 
     @staticmethod
     def read_user(login):
-        with open(r'E:\Tutorial\users.csv', 'r', newline='') as file:
-            reader = csv.reader(file, delimiter=';')
-            for user in reader:
-                if len(user) > 0 and user[0] == login:
-                    return User(user[0], user[1])
+        try:
+            with open(r'users.csv', 'r', newline='') as file:
+                reader = csv.reader(file, delimiter=';')
+                for user in reader:
+                    if len(user) > 0 and user[0] == login:
+                        return User(user[0], user[1])
+        except FileNotFoundError:
+            pass
 
     @staticmethod
     def read_users() -> list:
-        with open(r'E:\Tutorial\users.csv', 'r', newline='') as file:
+
+        with open(r'users.csv', 'r', newline='') as file:
             reader = csv.reader(file, delimiter=';')
             return list(reader)
             # new_users = []
@@ -79,7 +82,7 @@ class CsvUsers:
 
     @staticmethod
     def write_users(users):
-        with open(r'E:\Tutorial\users.csv', 'w', newline='') as file:
+        with open(r'users.csv', 'w', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerows(users)
 
@@ -104,10 +107,11 @@ class CsvUsers:
         CsvUsers.write_users(users)
 
 
-#users2 = DbUsers()
+# users2 = DbUsers()
 
 
 users2 = CsvUsers()
+
 
 @app.route('/game/')
 def game():
@@ -134,8 +138,8 @@ def login():
         user = users2.read_user(user_login)
         if not user:
             return render_template('login_game.html', fail='Такого пользователя нет')
-        elif user.password != user_password:
-            return render_template('login_game.html', fail='Вы ввели неверный пароль')
+        # elif user.password != user_password:
+        #     return render_template('login_game.html', fail='Вы ввели неверный пароль')
         if user.login == user_login and user.password == str(user_password):
             session['login'] = user_login
             session['password'] = user_password
